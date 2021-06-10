@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\SignInRequest;
+use App\Http\Requests\ProfileRequest;
+use Carbon\Carbon;
 
 class SignController extends Controller{
 
@@ -49,21 +52,33 @@ class SignController extends Controller{
     
 
 // ============================ change user info ==============================================
-    public function change(){
+    public function change(ProfileRequest $request){ 
         $userName = request('name');
         $userPass = Hash::make(request('password'));
+        $file = request('avatar');
         
-        if($userName){
-            Auth::User()->update(['name' => $userName]);
-            if($userPass){
-                Auth::User()->update(['password' => $userPass]);
+        Auth::User()->update(['name' => $userName]);
+        if($userPass){
+            Auth::User()->update(['password' => $userPass]);
+        }
+        if($file){
+            // add image to laravel
+            $image_name = Carbon::now()->timestamp.$file->getClientOriginalExtension();
+            $destinationPath = public_path('avatars');
+            $file->move($destinationPath,$image_name);
+            $data['avatar'] = $image_name;
+            
+            // add image name to db 
+            $avatar_check = Auth::User()->avatar;
+            Auth::User()->update(['avatar' => $image_name]);
+            
+            if($avatar_check){
+                $file_path = public_path().'/avatars/'.$avatar_check;
+                unlink($file_path);
             }
-            return redirect('dashboard');
         }
-        else{
-            return back() -> with('msg', 'Name can not be empty');
-        }
-         
+ 
+        return back();         
     }  
 
 }

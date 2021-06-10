@@ -19,6 +19,13 @@
           border: 3px grey solid;
           border-radius: 10px;
         }
+        .form{
+          width: 400px; 
+          border: 2px black solid; 
+          padding: 20px; 
+          text-align: center;
+          margin-top: 20px;
+        }
        
       </style>
     </head>
@@ -34,11 +41,16 @@
                 </h3>
               @endif
 
-              <form action="profile" method="POST">
+              <form action="profile" method="POST" class="form" enctype="multipart/form-data">
                 @csrf
-                
                 <div class="form-group">
-                    <label for="name">change Name</label>
+                  <label for="avatar">Avatar</label>
+                  <br>
+                  <input id="avatar" type="file" name="avatar">
+                </div>
+
+                <div class="form-group">
+                    <label class="mt-2" for="name">change Name</label>
                     <input type="text" 
                            name="name"
                            class="form-control" 
@@ -48,7 +60,7 @@
                  </div>
 
                   <div class="form-group">
-                    <label for="exampleInputPassword1">change password</label>
+                    <label class="mt-2" for="exampleInputPassword1">change password</label>
                     <input type="password" 
                            name="password"
                            class="form-control" 
@@ -56,7 +68,7 @@
                            placeholder="change password">
                   </div>
 
-                  <button type="submit" class="btn btn-success">Save</button>
+                  <button type="submit" class="btn btn-success mt-3">Save</button>
                 </form>
 
             </div>
