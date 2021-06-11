@@ -19,6 +19,22 @@
           border: 3px grey solid;
           border-radius: 10px;
         }
+        .avatar{
+          height: 80px; 
+          width: 80px; 
+          border-radius: 50%;
+          border: 2px solid;
+        }
+        .avatar:hover{
+          z-index: 100;
+          position: absolute;
+          height: 120px;
+          width: 120px;
+          cursor: pointer;
+          border: none;
+          top: -20px;
+          left: -20px;  
+        }
        
       </style>
     </head>
@@ -27,23 +43,30 @@
       <div class="container">
 
 {{--================================== user info ======================================--}}       
-        <div class="row">
-          <div class="col-md-6 user-info">   
-              <p>
-                <h4> Hi: {{ Auth::User()->name }} </h4>
-              </p>
-            </div>
+        <div class="row m-2">
+          <div class="col-md-6 user-info"  style="height: 80px">   
+            <div class="row">
+              
+              <div class="col-md-2"> 
+                <img src="{{ asset('avatars/'.Auth::User()->avatar) }}" class="avatar">  
+              </div>
+    
+              <div class="col-md-10 mt-4">
+                <h4 style="text-align: left"> Hi: {{ Auth::User()->name }} </h4>
+              </div>
 
-          <div class="col-md-6 btns-group"> 
-            
+            </div>
+          </div>
+
+    
+          <div class="col-md-6 btns-group">     
             <a href="{{ url('/profile') }}" class="btns">
               <button class="btn btn-warning">change profile info</button>
             </a>
 
             <a href="{{ url('/leave') }}" class="btns pl-2">
-              <button class="btn btn-danger">log out</button>
+              <button class="btn btn-danger">log out -></button>
             </a>
-
           </div>
         </div>
 

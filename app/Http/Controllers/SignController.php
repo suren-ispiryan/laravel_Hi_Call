@@ -72,13 +72,14 @@ class SignController extends Controller{
             $avatar_check = Auth::User()->avatar;
             Auth::User()->update(['avatar' => $image_name]);
             
+            // delete old photo from laravel
             if($avatar_check){
                 $file_path = public_path().'/avatars/'.$avatar_check;
                 unlink($file_path);
             }
         }
  
-        return back();         
+        return back();      
     }  
 
 }
