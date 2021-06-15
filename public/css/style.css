@@ -1,0 +1,139 @@
+/*======================================== velcome ===========================================*/
+
+.heading1{
+  text-align: center;
+}
+.parent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+}
+.sub-parents{
+  min-width: 400px;
+  padding: 100px;
+}
+form{
+  padding: 40px 40px 40px;
+  border: 1px black solid;
+  box-shadow: black 4px 4px 10px;
+  text-align: center;
+}
+.buttons{
+ width: 50%;
+ margin-top: 15px
+}
+
+
+/*======================================== sign in sign up ===========================================*/
+
+.user-info{
+  color: green;
+  text-align: left;
+}
+.btns-group{
+  text-align: right;
+}
+.blackboard{
+  height: 60vh;
+  width: 60vw;
+  border: 3px grey solid;
+  border-radius: 10px;
+}
+.form{
+  width: 400px; 
+  border: 2px black solid; 
+  padding: 20px; 
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+/*======================================== forgot password ===========================================*/
+
+.form-forgor{
+  border-radius: 5px;
+  border: 1px black solid;
+  width: 100%;
+  text-align: center;
+}
+.forgot-msg{
+  padding-top: 20px;
+  font-size: 12px;
+}
+.btn-send-pass{
+  padding: 5px 20px;
+  border-radius: 5px;
+}
+
+
+
+/* ======================================= dashboard ========================================= */
+
+
+.user-info{
+  color: green;
+  text-align: left;
+}
+.btns-group{
+  text-align: right;
+}
+.avatar{
+  height: 80px; 
+  width: 80px; 
+  border-radius: 50%;
+  border: 2px solid;
+}
+.avatar:hover{
+  z-index: 100;
+  position: absolute;
+  height: 120px;
+  width: 120px;
+  cursor: pointer;
+  border: none;
+  top: -20px;
+  left: -20px;  
+}
+
+/* ================================================= blackboard ===================================== */
+
+.blackboard{
+  height: 400px;
+  width: 800px;   
+  position: relative;
+}
+.blackboard-frame{
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+
+/*======================================== blackboard ===========================================*/
+
+.whiteboard {
+  border: 3px grey solid;
+  border-radius: 10px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+.colors {
+  padding: 10px;
+  position: fixed;
+  }
+.color {
+  display: inline-block;
+  height: 48px;
+  width: 48px;
+  cursor: pointer;
+}
+.color.black { background-color: black; }
+.color.red { background-color: red; }
+.color.green { background-color: green; }
+.color.blue { background-color: blue; }
+.color.yellow { background-color: yellow; }

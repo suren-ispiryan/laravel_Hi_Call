@@ -10,8 +10,8 @@ use App\Http\Controllers\SignController;
 // ====================== Routes ================================
 
 Route::get('/', function () {
-    return view('welcome');
-})->name('login');
+    return view('sign');
+})->name('sign');
 
 Route::get('signUp', function () { // gnaluc es linky dir 
     return view('signUp'); // gna es ej
@@ -21,7 +21,13 @@ Route::get('signIn', function () { // gnaluc es linky dir
     return view('signIn'); // gna es ej
 });
 
+Route::get('sendPassword', function () { // gnaluc es linky dir 
+    return view('sendPassword'); // gna es ej
+});
 
+Route::get('forgotPassword', function () {
+    return view('forgotPassword');
+})->name('forgotPassword');
 
 // ==================== Middleware ================================
 
@@ -43,9 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-
 // ===================== Controllers ============================
 
 Route::post('signUp', [SignController::class, 'signUp']); 
 Route::post('signIn', [SignController::class, 'signIn']);
-
+Route::post('sendPassword', [SignController::class, 'sendPassword']);

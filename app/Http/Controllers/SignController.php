@@ -80,6 +80,14 @@ class SignController extends Controller{
         }
  
         return back();      
-    }  
+    } 
+    
+
+
+// ============================ send new password ==============================================
+    public function sendPassword(){ 
+        $newEmail = request('email');
+        dd($newEmail);      
+    } 
 
 }

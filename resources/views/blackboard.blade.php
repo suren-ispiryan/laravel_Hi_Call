@@ -1,43 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Dash</title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet"> 
-      <style> 
-       /* ============= blackboard =============== */
-        .whiteboard {
-          border: 3px grey solid;
-          border-radius: 10px;
-          height: 100%;
-          width: 100%;
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          top: 0;
-        }
-        .colors {
-          padding: 10px;
-          position: fixed;
-          }
-        .color {
-          display: inline-block;
-          height: 48px;
-          width: 48px;
-          cursor: pointer;
-        }
-        .color.black { background-color: black; }
-        .color.red { background-color: red; }
-        .color.green { background-color: green; }
-        .color.blue { background-color: blue; }
-        .color.yellow { background-color: yellow; }
-        
-      </style>
-    </head>
-  <body>
+@extends('layout.public')
   
+@section('content')
     <canvas class="whiteboard" style="display: block">Your  browser is not supported Canvas  </canvas>
 
     <div class="colors">
@@ -186,7 +149,4 @@
 })();
 </script>  
 
-
-
-  </body>
-</html>
+@endsection
