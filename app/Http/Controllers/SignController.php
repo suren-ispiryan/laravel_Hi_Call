@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request;        
+use Illuminate\Support\Facades\Mail;        // sending email
+
 use App\Models\User;
-use App\Http\Requests\SignUpRequest;
-use App\Http\Requests\SignInRequest;
-use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\ForgotEmailRequest;   // Request
+use App\Http\Requests\SignUpRequest;        // Request
+use App\Http\Requests\SignInRequest;        // Request
+use App\Http\Requests\ProfileRequest;       // Request
+use App\Mail\SendMail;                      // sending email
+
 use Carbon\Carbon;
+
+
+
 
 class SignController extends Controller{
 
@@ -85,9 +93,17 @@ class SignController extends Controller{
 
 
 // ============================ send new password ==============================================
-    public function sendPassword(){ 
-        $newEmail = request('email');
-        dd($newEmail);      
+    public function sendPassword(ForgotEmailRequest $request){ 
+      $newEmail = request('email');
+      $user = User::where('email', $newEmail)->first();
+      if($user){
+            // send to users email a link for spassword recover page
+        Mail::to($newEmail)->send(new SendMail('tocken'));
+            // create tocken for identidfy user
+            
+      }
+    
+      return redirect('/');
     } 
 
 }

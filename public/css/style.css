@@ -65,7 +65,10 @@ form{
   padding: 5px 20px;
   border-radius: 5px;
 }
-
+.forgotErr{
+  color: red;
+  font-size: 14px;
+}
 
 
 /* ======================================= dashboard ========================================= */

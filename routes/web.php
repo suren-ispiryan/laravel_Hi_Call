@@ -29,6 +29,11 @@ Route::get('forgotPassword', function () {
     return view('forgotPassword');
 })->name('forgotPassword');
 
+Route::get('resetPassword', function () {
+    return view('resetPassword');
+})->name('resetPassword');
+
+
 // ==================== Middleware ================================
 
 Route::group(['middleware' => 'auth'], function () {

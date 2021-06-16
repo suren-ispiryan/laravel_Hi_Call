@@ -8,15 +8,21 @@
       
               <div class="row">
                 <div class="col-md-4"></div>
-
+                
                 <div class="col-md-4">
                     <form action="sendPassword" method="POST" class="form-forgot p-3">
-                      <label for="email" class="mt-4 forgot-msg">we will send your password to email below</label>
+                      @csrf
+                     
+                      @error('email')
+                        <div class="alert alert-danger forgotErr">{{ $message }}</div>
+                      @enderror  
+
+                      <label for="email" class="mt-2 forgot-msg">we will send your password to email below</label>
                       <input type="email" 
                              id="email" 
                              class="form-control" 
                              name="email">
-                            
+                             
                       <a href="{{ url('/') }}" class="btns pl-2">
                         <div class="btn btn-success btn-send-pass"><- back to login</div>
                       </a>
