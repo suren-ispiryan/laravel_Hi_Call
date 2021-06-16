@@ -97,13 +97,26 @@ class SignController extends Controller{
       $newEmail = request('email');
       $user = User::where('email', $newEmail)->first();
       if($user){
-            // send to users email a link for spassword recover page
-        Mail::to($newEmail)->send(new SendMail('tocken'));
             // create tocken for identidfy user
-            
+        $token = md5(rand(1000, 9999));
+            // put token in db
+        $user->remember_token = $token;
+        $user->save(); // or like this -> $user->update(['remember_token' => $token]);
+
+            // send to users email a link for spassword recover page
+        Mail::to($newEmail)->send(new SendMail($user));    
       }
     
       return redirect('/');
     } 
+
+
+
+
+    // ============================ scheckTokenAndMail ==============================================
+    public function checkTokenAndMail($email, $token){ 
+        dd($email);
+        return view('resetPassword');
+    }
 
 }

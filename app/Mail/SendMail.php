@@ -10,14 +10,14 @@ use Illuminate\Queue\SerializesModels;
 class SendMail extends Mailable{
     use Queueable, SerializesModels;
 
-    public $data;
+    public $user;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($data){
-        $this->data = $data;
+    public function __construct($user){
+        $this->user = $user;
     }
 
     /**
@@ -30,6 +30,6 @@ class SendMail extends Mailable{
         return $this->from('surenevistep@gmail.com')
                     ->subject('This is a link  for reseting your password')
                     ->view('sendPassword')
-                    ->with('data', $this->data);
+                    ->with(['user' => $this->user]);
     }
 }
