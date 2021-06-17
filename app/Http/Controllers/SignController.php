@@ -137,7 +137,7 @@ class SignController extends Controller{
             // change password
             $newPass = Hash::make(request('passReset'));     
             $user->update(['password' => $newPass, 'remember_token' => null]); 
-            return view('sign')->with('resetMsg', "Password reseted succesfully");
+            return redirect('/')->with('resetMsg', "Password reseted succesfully");
         }
      
         return abort(403);
