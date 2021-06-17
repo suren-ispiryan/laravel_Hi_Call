@@ -12,9 +12,10 @@ use App\Http\Requests\ForgotEmailRequest;   // Request
 use App\Http\Requests\SignUpRequest;        // Request
 use App\Http\Requests\SignInRequest;        // Request
 use App\Http\Requests\ProfileRequest;       // Request
-use App\Mail\SendMail;                      // sending email
+use App\Http\Requests\SetNewPasswordRequest;// Request
 
-use Carbon\Carbon;
+use App\Mail\SendMail;                      // Sending email
+use Carbon\Carbon;                          // Set date
 
 
 
@@ -52,12 +53,16 @@ class SignController extends Controller{
     }
 
 
+
+
 // ================================= log out =================================================
     public function logout(){
         Auth::logout();
         return redirect('/'); 
     }  
     
+
+
 
 // ============================ change user info ==============================================
     public function change(ProfileRequest $request){ 
@@ -113,10 +118,29 @@ class SignController extends Controller{
 
 
 
-    // ============================ scheckTokenAndMail ==============================================
-    public function checkTokenAndMail($email, $token){ 
-        dd($email);
-        return view('resetPassword');
+    // ============================ scheckToken ==============================================
+    public function checkToken($email, $token){
+        $user = User::where('email', $email)->where('remember_token', $token)->first();
+        if($user){
+            return view('resetPassword');
+        }
+        return abort(403);
+
+    }
+
+
+
+    // ============================ scheck Token Again For Hackers And Mail ==============================================
+    public function checkPass(SetNewPasswordRequest $request, $email, $token){ 
+        $user = User::where('email', $email)->where('remember_token', $token)->first();
+        if($user){
+            // change password
+            $newPass = Hash::make(request('passReset'));     
+            $user->update(['password' => $newPass, 'remember_token' => null]); 
+            return view('sign')->with('resetMsg', "Password reseted succesfully");
+        }
+     
+        return abort(403);
     }
 
 }

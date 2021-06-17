@@ -21,9 +21,7 @@ Route::get('forgotPassword', function () {
     return view('forgotPassword');
 })->name('forgotPassword');
 
-Route::get('resetPassword/{email}/{token}', function () {
-    return view('resetPassword');
-})->name('resetPassword');
+Route::get('resetPassword/{email}/{token}', [SignController::class, 'checkToken']);
 
 
 // ==================== Middleware ================================
@@ -52,4 +50,4 @@ Route::group(['middleware' => 'auth'], function () {
 Route::post('signUp', [SignController::class, 'signUp']); 
 Route::post('signIn', [SignController::class, 'signIn']);
 Route::post('sendPassword', [SignController::class, 'sendPassword']);
-Route::post('resetPassword/{email}/{token}', [SignController::class, 'checkTokenAndMail']);
+Route::post('resetPassword/{email}/{token}', [SignController::class, 'checkPass']);

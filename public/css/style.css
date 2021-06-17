@@ -69,7 +69,13 @@ form{
   color: red;
   font-size: 14px;
 }
-
+.reset-form{
+  margin-top: 50px;
+}
+.resetLabel{
+  margin-top: 20px;
+  font-size: 14px;
+}
 
 /* ======================================= dashboard ========================================= */
 

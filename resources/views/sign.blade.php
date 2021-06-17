@@ -7,9 +7,11 @@
 <div class="row">
   
       <div class="col-md-12">
-        @if ($errors->any())
+  
+        @if($errors->any())
         <h3 style="text-align: center">Errors</h3>
-          <div class="alert alert-danger">
+         
+        <div class="alert alert-danger">
               <ul>
                   @foreach ($errors->all() as $error)
                       <li style="color: red">{{ $error }}</li>
@@ -28,6 +30,11 @@
 
     <div class="col-md-6 sub-parents">  
       <form action="signUp" method="POST">
+        
+        @if(isset($resetMsg))
+          <h6 style="color: green">{{ $resetMsg }}</h6>
+        @endif
+
         @csrf
         <h3 class="heading1 mb-5">Sign up</h3>
         <input type="text" name="name" class="form-control mb-3" placeholder="Your name">
