@@ -1,31 +1,21 @@
 <?php
-
 // ====================== imports ================================
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignController;
 
+// ====================== Get ================================
+Route::get('/', [SignController::class, 'showSign']);
+Route::get('sendPassword', [SignController::class, 'showPassword']);
+Route::get('forgotPassword', [SignController::class, 'showForgotPassword']);
+Route::get('resetPassword/{em ail}/{token}', [SignController::class, 'checkToken']);
 
+// ===================== Post ============================
+Route::post('signUp', [SignController::class, 'signUp']); 
+Route::post('signIn', [SignController::class, 'signIn']);
+Route::post('sendPassword', [SignController::class, 'sendPassword']);
+Route::post('resetPassword/{email}/{token}', [SignController::class, 'checkPass']);
 
-// ====================== Routes ================================
-
-Route::get('/', function () {
-    return view('sign');
-})->name('sign');
-
-Route::get('sendPassword', function () { // gnaluc es linky dir 
-    return view('sendPassword'); // gna es ej
-});
-
-Route::get('forgotPassword', function () {
-    return view('forgotPassword');
-})->name('forgotPassword');
-
-Route::get('resetPassword/{email}/{token}', [SignController::class, 'checkToken']);
-
-
-// ==================== Middleware ================================
-
+// ==================== dashboard ================================
 Route::group(['middleware' => 'auth'], function () {
     Route::get('dashboard', function () { // gnaluc es linky dir 
         return view('dashboard'); // gna es ej
@@ -38,16 +28,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('blackboard', function () { // gnaluc es linky dir 
         return view('blackboard'); // gna es ej
     })->name('blackboard');
-
     
     Route::get('leave', [SignController::class, 'logout']); 
     Route::post('profile', [SignController::class, 'change']); 
 });
-
-
-// ===================== Controllers ============================
-
-Route::post('signUp', [SignController::class, 'signUp']); 
-Route::post('signIn', [SignController::class, 'signIn']);
-Route::post('sendPassword', [SignController::class, 'sendPassword']);
-Route::post('resetPassword/{email}/{token}', [SignController::class, 'checkPass']);

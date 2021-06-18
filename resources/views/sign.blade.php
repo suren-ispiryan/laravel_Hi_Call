@@ -30,11 +30,6 @@
 
     <div class="col-md-6 sub-parents">  
       <form action="signUp" method="POST">
-        
-        @if(isset($resetMsg))
-          <h6 style="color: green">{{ $resetMsg }}</h6>
-        @endif
-
         @csrf
         <h3 class="heading1 mb-5">Sign up</h3>
         <input type="text" name="name" class="form-control mb-3" placeholder="Your name">
@@ -49,6 +44,9 @@
 
     <div class="col-md-6 sub-parents">  
       <form action="signIn" method="POST">
+        @if(isset($resetMsg))
+          <h6 style="color: green">{{ $resetMsg }}</h6>
+        @endif
         @csrf
         <h3 class="heading1 mb-5">Sign in</h3>
         <input type="email" name="email" class="form-control mb-3" placeholder="Your email"> 

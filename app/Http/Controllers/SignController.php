@@ -22,6 +22,20 @@ use Carbon\Carbon;                          // Set date
 
 class SignController extends Controller{
 
+// ================================== show pages ================================================
+    public function showSign(){   
+        return view('sign');
+    }
+
+    public function showPassword(){   
+        return view('sendPassword');
+    }
+
+    public function showForgotPassword(){   
+        return view('forgotPassword');
+    }
+
+
 // ================================== sign up ================================================
     public function signUp(SignUpRequest $request){                
         $user = User::create([
@@ -29,9 +43,10 @@ class SignController extends Controller{
             'email' => request('email'),
             'password' => Hash::make(request('password')),
         ]);
-        Auth::login($user); // put in session
-        
-        if($user) return redirect('dashboard');
+        if($user) {
+            Auth::login($user); // put in session
+            return redirect('dashboard');
+        }
         return abort(403);
     }
 
@@ -54,14 +69,12 @@ class SignController extends Controller{
 
 
 
-
 // ================================= log out =================================================
     public function logout(){
         Auth::logout();
         return redirect('/'); 
     }  
     
-
 
 
 // ============================ change user info ==============================================
@@ -76,10 +89,10 @@ class SignController extends Controller{
         }
         if($file){
             // add image to laravel
-            $image_name = Carbon::now()->timestamp.$file->getClientOriginalExtension();
+            $image_name = Carbon::now()->timestamp.".".$file->getClientOriginalExtension();
             $destinationPath = public_path('avatars');
             $file->move($destinationPath,$image_name);
-            $data['avatar'] = $image_name;
+            // $data['avatar'] = $image_name;
             
             // add image name to db 
             $avatar_check = Auth::User()->avatar;
@@ -114,7 +127,6 @@ class SignController extends Controller{
     
       return redirect('/');
     } 
-
 
 
 
